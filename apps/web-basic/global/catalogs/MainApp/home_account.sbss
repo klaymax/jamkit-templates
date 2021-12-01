@@ -1,0 +1,20 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+    $_ACCOUNT_IMAGE_SIZE = 36dp
+    $_ACCOUNT_IMAGE_MARGIN = 5dp
+    $_NAME_TEXT_SIZE = 1.1
+    $_ADDRESS_TEXT_SIZE = 0.8
+else
+    $_ACCOUNT_IMAGE_SIZE = 36dp
+    $_ACCOUNT_IMAGE_MARGIN = 5dp
+    $_NAME_TEXT_SIZE = 1.1
+    $_ADDRESS_TEXT_SIZE = 0.8
+end
+
+#img_account: width=$_ACCOUNT_IMAGE_SIZE, height=$_ACCOUNT_IMAGE_SIZE, position=abs, gravity=left
+#btn_change: width=1pw, height=1ph
+
+/sbml/content: display=block, position=abs, gravity=left, padding-left=$_ACCOUNT_IMAGE_SIZE+$_ACCOUNT_IMAGE_MARGIN
+/sbml/content/name: font-family=@{$SANS_MEDIUM}, font-size=$_NAME_TEXT_SIZE, text-color=$COLOR_WHITE
+/sbml/content/address: font-family=@{$SANS_REGULAR}, font-size=$_ADDRESS_TEXT_SIZE, text-color=$THEME_COLOR_ACCOUNT_DARK_TEXT

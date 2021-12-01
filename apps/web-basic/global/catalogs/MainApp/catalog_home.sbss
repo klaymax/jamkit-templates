@@ -1,0 +1,37 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+    $_TOP_BLANK_HEIGHT = 3dp
+    $_PROGRESS_HEIGHT = 2dp
+    $_TOOLBAR_HEIGHT = 44dp
+    $_TOOLBAR_MARGIN = 10dp
+    $_ACCOUNT_SBML_WIDTH = (1pw-(36dp*2+10dp*3))
+    $_TOOLBAR_BUTTON_SIZE = 36dp
+else
+    $_TOP_BLANK_HEIGHT = 3dp
+    $_PROGRESS_HEIGHT = 2dp
+    $_TOOLBAR_HEIGHT = 44dp
+    $_TOOLBAR_MARGIN = 10dp
+    $_ACCOUNT_SBML_WIDTH = (1pw-(36dp*2+10dp*3))
+    $_TOOLBAR_BUTTON_SIZE = 36dp
+end
+
+#web: width=1pw, height=1ph-(1sbh+$_TOP_BLANK_HEIGHT+$_TOOLBAR_HEIGHT), autoresizing=flexible-size, \
+        position=abs, gravity=top, y=1sbh+$_TOP_BLANK_HEIGHT, \
+        edge-swipe-enabled=yes, handles-back-key=yes
+
+#blank_top: color=$THEME_COLOR_MAIN, width=1pw, height=1sbh+3dp, position=abs, gravity=top
+#progress_web: progress-color=$COLOR_WHITE, track-color=$THEME_COLOR_MAIN, \
+        width=1pw, height=$_PROGRESS_HEIGHT, position=abs, gravity=top, y=1sbh, hidden=yes
+
+#section_toolbar: width=1pw, height=$_TOOLBAR_HEIGHT, position=abs, gravity=bottom, y=-1eb, \
+        autoresizing=flexible-top, content-background-color=$COLOR_BLACK
+#sbml_account: width=$_ACCOUNT_SBML_WIDTH, height=1ph, position=abs, gravity=left, x=$_TOOLBAR_MARGIN
+#btn_toolbar: width=$_TOOLBAR_BUTTON_SIZE, height=$_TOOLBAR_BUTTON_SIZE, vertical-align=middle
+
+#cell_settings: width=1pw, height=1ph-$_TOOLBAR_HEIGHT, position=abs, gravity=top
+
+/catalog: page-background-color=$THEME_COLOR_BACKGROUND, text-color=$THEME_COLOR_TEXT
+/catalog/toolbar: display=none
+/catalog/toolbar/right: display=block, position=abs, gravity=right, text-align=right, \
+        padding-right=$_TOOLBAR_MARGIN

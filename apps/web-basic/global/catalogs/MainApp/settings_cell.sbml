@@ -1,0 +1,25 @@
+=begin cell: script-when-loaded=on_loaded, \
+             data-binding=settings.changed, script-when-data-changed=on_data_changed
+
+=begin content
+
+=begin close
+=object button: image=btn_popup_close.png, script=close, style=btn_close
+=end close
+
+=begin box
+=begin header
+@{Settings}
+=end header
+
+=object section: section=menu.1, style=section_menu
+=begin menu: id=menu.1
+=object label: text="@{Connect wallet automatically}", style=label_menu
+=object button: id=btn.auto-connect, script=toggle_auto_connect, style=btn_switch
+=end menu
+=end box
+
+=end content
+
+=end cell
+ 

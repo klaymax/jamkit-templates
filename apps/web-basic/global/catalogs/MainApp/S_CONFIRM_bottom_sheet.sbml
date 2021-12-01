@@ -1,0 +1,21 @@
+=begin sheet: script-when-cancel=on_cancel
+
+=begin handle
+=object blank: style=blank_handle
+=end handle
+
+=object section: section=header, style=section_header
+=begin header: id=header
+=object label: text=@{Confirm}, style=label_header
+=end header
+
+=begin message
+${message}
+=end message
+
+=begin buttons
+=(object button: script=cancel, label="@{Cancel}", style=btn_cancel)=\
+=(object button: script=ok, label="@{OK}", style=btn_action, style=btn_ok)=
+=end buttons
+
+=end sheet

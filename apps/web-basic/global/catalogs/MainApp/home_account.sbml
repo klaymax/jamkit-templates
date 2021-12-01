@@ -1,0 +1,16 @@
+=begin sbml
+
+=object image: filename=btn_account.png, style=img_account
+
+=begin content
+=begin name
+${name}
+=end name
+=begin address
+${address}
+=end address
+=end content
+
+=object button: script=change_account, style=btn_change
+
+=end sbml

@@ -1,0 +1,37 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+    $_ERROR_EFFECT_SIZE = 280dp
+    $_ERROR_EFFECT_POSITION_Y = -120dp
+    $_RELOAD_BUTTON_WIDTH = 190dp
+    $_RELOAD_BUTTON_HEIGHT = 40dp
+    $_RELOAD_BUTTON_POSITION_Y = -80dp
+    $_RELOAD_BUTTON_RADUS = 2dp
+    $_RELOAD_BUTTON_TEXT_SIZE = 1.0
+    $_RELOAD_BUTTON_RADUS = 2dp
+    $_MESSAGE_POSITION_Y = 10dp
+    $_MESSAGE_TEXT_SIZE = 1.1
+else
+    $_ERROR_EFFECT_SIZE = 280dp
+    $_ERROR_EFFECT_POSITION_Y = -120dp
+    $_RELOAD_BUTTON_WIDTH = 190dp
+    $_RELOAD_BUTTON_HEIGHT = 40dp
+    $_RELOAD_BUTTON_POSITION_Y = -80dp
+    $_RELOAD_BUTTON_RADUS = 2dp
+    $_RELOAD_BUTTON_TEXT_SIZE = 1.0
+    $_RELOAD_BUTTON_RADUS = 2dp
+    $_MESSAGE_POSITION_Y = 10dp
+    $_MESSAGE_TEXT_SIZE = 1.1
+end
+
+#effect_error: width=$_ERROR_EFFECT_SIZE, height=$_ERROR_EFFECT_SIZE, \
+        position=abs, gravity=center, y=$_ERROR_EFFECT_POSITION_Y
+
+#btn_reload: width=$_RELOAD_BUTTON_WIDTH, height=$_RELOAD_BUTTON_HEIGHT, \
+        position=abs, gravity=bottom, y=$_RELOAD_BUTTON_POSITION_Y, \
+        label-font-family=@{$SANS_MEDIUM}, label-font-size=$_RELOAD_BUTTON_TEXT_SIZE, \
+        label-color=$COLOR_WHITE, highlight-label-color=$COLOR_LIGHT_GRAY, \
+        content-border-radius=$_RELOAD_BUTTON_RADUS, content-background-color=$THEME_COLOR_ERROR
+
+/catalog/message: display=block, position=abs, gravity=center, y=$_MESSAGE_POSITION_Y, \
+        font-family=@{$SANS_REGULAR}, font-size=$_MESSAGE_TEXT_SIZE, text-align=center

@@ -1,0 +1,22 @@
+=begin catalog: script-when-loaded=on_loaded
+
+=object web: id=web, javascript-bridge="__$_bridge", user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36", \
+            script-when-start=on_web_start, script-when-loaded=on_web_loaded, script-when-failed=on_web_failed, \
+            disallowed-url-patterns="klayswap\\.com", script-when-prevent=on_web_prevent, \
+            reloads-when-pull=yes, handles-back-key=yes, error-page-hidden=yes, \
+            console-log-enabled=yes, style=web
+=object blank: style=blank_top
+=object progress: type=loading, owner=web, style=progress_web
+
+=object section: section=toolbar, style=section_toolbar
+=begin toolbar: id=toolbar
+=object sbml: id=sbml.account, style=sbml_account
+=begin right
+=(object button: image="btn_settings.png", script=toggle_settings, style=btn_toolbar)=\
+=(object button: image="btn_close.png", script=close, style=btn_toolbar)=
+=end right
+=end toolbar
+
+=object cell: id=cell.settings, display-unit=settings, hidden=yes, loads-when-hide=yes, style=cell_settings
+
+=end catalog

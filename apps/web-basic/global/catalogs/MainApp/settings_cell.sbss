@@ -1,0 +1,45 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+    $_CONTENT_BOTTOM_MARGIN = 10dp
+    $_BOX_SIDE_MARGIN = 20dp
+    $_BOX_SIDE_PADDING = 20dp
+    $_HEADER_TOP_MARGIN = 25dp
+    $_HEADER_BOTTOM_MARGIN = 15dp
+    $_HEADER_TEXT_SIZE = 1.2
+    $_CLOSE_BUTTON_SIZE = 60dp
+    $_CLOSE_BUTTON_MARGIN = 10dp
+    $_MENU_MARGIN = 20dp
+    $_MENU_SECTION_HEIGHT = 54dp
+    $_MENU_TEXT_SIZE = 1.0
+    $_SWITCH_BUTTON_HEIGHT = 36dp
+else
+    $_CONTENT_BOTTOM_MARGIN = 10dp
+    $_BOX_SIDE_MARGIN = 20dp
+    $_BOX_SIDE_PADDING = 20dp
+    $_HEADER_TOP_MARGIN = 25dp
+    $_HEADER_BOTTOM_MARGIN = 5dp
+    $_HEADER_TEXT_SIZE = 1.2
+    $_CLOSE_BUTTON_SIZE = 60dp
+    $_CLOSE_BUTTON_MARGIN = 10dp
+    $_MENU_MARGIN = 20dp
+    $_MENU_SECTION_HEIGHT = 54dp
+    $_MENU_TEXT_SIZE = 1.0
+    $_SWITCH_BUTTON_HEIGHT = 36dp
+end
+
+#btn_close: width=$_CLOSE_BUTTON_SIZE, height=$_CLOSE_BUTTON_SIZE
+
+#section_menu: width=100%, height=$_MENU_SECTION_HEIGHT
+#label_menu: height=1ph, position=abs, gravity=left, x=$_BOX_SIDE_PADDING, \
+        font-family=@{$SANS_MEDIUM}, font-size=$_MENU_TEXT_SIZE 
+#btn_switch: height=$_SWITCH_BUTTON_HEIGHT, position=abs, gravity=right, x=-$_BOX_SIDE_PADDING, \
+        image=btn_switch_off.png, selected-image=btn_switch_on.png
+
+/cell: page-background-color=$COLOR_BLACK_DEEP_DIM
+/cell/content: display=block, position=abs, gravity=bottom, y=-$_CONTENT_BOTTOM_MARGIN
+/cell/content/close: margin-bottom=$_CLOSE_BUTTON_MARGIN
+/cell/content/box: margin="0 $_BOX_SIDE_MARGIN", background-color=$COLOR_WHITE
+/cell/content/box/header: margin="$_HEADER_TOP_MARGIN $_BOX_SIDE_PADDING $_HEADER_BOTTOM_MARGIN $_BOX_SIDE_PADDING", \
+        font-family=@{$SANS_BOLD}, font-size=$_HEADER_TEXT_SIZE 
+/cell/content/box/menu: display=none
