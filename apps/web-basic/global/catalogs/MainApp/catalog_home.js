@@ -8,6 +8,7 @@ const kaikas   = require("kaikas-bridge"),
 
 var _klaytn_send_request = global["klaytn_send_request"];
 var _settings_visible = false;
+var _close_button_pressed = false;
 
 function _klaytn_send_request_safely(params, request) {
     var { method, params: rpc_params } = request;
@@ -120,7 +121,17 @@ function back() {
 }
 
 function close() {
-    controller.action("app-close");
+    if (!_close_button_pressed) {
+        controller.action("toast", {
+            "message": controller.catalog().string("Press one more time to exit.")
+        });
+        timeout(1, function() {
+           _close_button_pressed = false; 
+        });
+        _close_button_pressed = true;
+    } else {
+        controller.action("app-close");
+    }
 }
 
 function _update_current_account() {
