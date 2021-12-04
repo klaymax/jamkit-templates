@@ -125,7 +125,7 @@ function close() {
         controller.action("toast", {
             "message": controller.catalog().string("Press one more time to exit.")
         });
-        timeout(1, function() {
+        timeout(2, function() {
            _close_button_pressed = false; 
         });
         _close_button_pressed = true;
