@@ -1,4 +1,5 @@
 const kaikas   = require("kaikas-bridge"),
+      klip     = require("klip-bridge"),
       klaytn   = require("klaytn-api"),
       accounts = require("accounts-api"),
       webjs    = require("webjs-helper"),
