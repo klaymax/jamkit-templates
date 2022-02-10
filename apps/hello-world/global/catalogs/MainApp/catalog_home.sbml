@@ -1,0 +1,12 @@
+=begin catalog: script-when-loaded=on_loaded
+
+=begin welcome
+Hello, World!
+=end welcome
+
+=begin account
+=(object label: id=label.account, style=label_account)=\
+=(object button: label="@{Change}", script=change_account, style=btn_change)=
+=end account
+
+=end catalog

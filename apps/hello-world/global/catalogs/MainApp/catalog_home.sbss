@@ -1,0 +1,41 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+    $_WELCOME_TEXT_SIZE = 1.4
+	$_ACCOUNT_BOTTOM_MARGIN = 60dp
+	$_ACCOUNT_LABEL_WIDTH = 160dp
+	$_ACCOUNT_LABEL_HEIGHT = 30dp
+	$_ACCOUNT_LABEL_PADDING = 10dp
+	$_ACCOUNT_TEXT_SIZE = 1.2
+	$_CHANGE_BUTTON_HEGIHT = 32dp
+	$_CHANGE_BUTTON_MARGIN = 10dp
+	$_CHANGE_BUTTON_PADDING = 10dp
+	$_CHANGE_BUTTON_TEXT_SIZE = 1.1
+else
+    $_WELCOME_TEXT_SIZE = 1.3
+	$_ACCOUNT_BOTTOM_MARGIN = 60dp
+	$_ACCOUNT_LABEL_WIDTH = 160dp
+	$_ACCOUNT_LABEL_HEIGHT = 30dp
+	$_ACCOUNT_LABEL_PADDING = 10dp
+	$_ACCOUNT_TEXT_SIZE = 1.2
+	$_CHANGE_BUTTON_HEGIHT = 32dp
+	$_CHANGE_BUTTON_MARGIN = 10dp
+	$_CHANGE_BUTTON_PADDING = 10dp
+	$_CHANGE_BUTTON_TEXT_SIZE = 1.1
+end
+
+#label_account: width=$_ACCOUNT_LABEL_WIDTH, height=$_ACCOUNT_LABEL_HEIGHT, content-padding="0 $_ACCOUNT_LABEL_PADDING", \
+		font-family=@{$SANS_REGULAR}, font-size=$_ACCOUNT_TEXT_SIZE, text-align=center, \
+		line-break-mode=middle-truncation, vertical-align=middle, \
+		content-background-color=$COLOR_DARK_WHITE
+
+#btn_change: height=$_CHANGE_BUTTON_HEGIHT, margin-left=$_CHANGE_BUTTON_MARGIN, content-padding="0 $_CHANGE_BUTTON_PADDING", \
+		label-font-family=@{$SANS_MEDIUM}, label-font-size=$_CHANGE_BUTTON_TEXT_SIZE, \
+		content-border-width=1dp, content-border-color=$THEME_COLOR_TEXT, vertical-align=middle
+
+/catalog: page-background-color=$THEME_COLOR_BACKGROUND, text-color=$THEME_COLOR_TEXT
+/catalog/welcome: display=block, position=abs, gravity=center, \
+		font-size=$_WELCOME_TEXT_SIZE, text-align=center
+/catalog/account: display=block, position=abs, gravity=bottom, y=-(1eb+$_ACCOUNT_BOTTOM_MARGIN), \
+		text-align=center
+			
