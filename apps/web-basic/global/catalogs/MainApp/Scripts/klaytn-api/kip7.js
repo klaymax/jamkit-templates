@@ -7,20 +7,26 @@ var module = (function() {
     
     return {
         name: function(token) {
-            return new Promise(function(resolve, reject) {
-                
-            });
+            return actions.invoke_app("__MAIN__", "api__klaytn_kip7_name", {
+                "token": token
+            })
+                .then(function(result) {
+                    return _resolve(result);
+                });
         },
 
         symbol: function(token) {
-            return new Promise(function(resolve, reject) {
-                
-            });
+            return actions.invoke_app("__MAIN__", "api__klaytn_kip7_symbol", {
+                "token": token
+            })
+                .then(function(result) {
+                    return _resolve(result);
+                });
         },
 
         decimals: function(token) {
             return actions.invoke_app("__MAIN__", "api__klaytn_kip7_decimals", {
-                token: token
+                "token": token
             })
                 .then(function(result) {
                     return _resolve(result);

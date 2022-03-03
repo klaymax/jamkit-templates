@@ -1,8 +1,8 @@
 =begin catalog: script-when-loaded=on_loaded
 
-=object web: id=web, javascript-bridge="__$_bridge", user-agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.141 Safari/537.36", \
+=object web: id=web, javascript-bridge="__$_bridge", content-script@start=cleanup_contents.js, uses-browser-agent=yes, \
             script-when-start=on_web_start, script-when-loaded=on_web_loaded, script-when-failed=on_web_failed, \
-            disallowed-url-patterns="klayswap\\.com", script-when-prevent=on_web_prevent, \
+            disallowed-url-patterns="klayswap\\.com,intent://klipwallet", script-when-prevent=on_web_prevent, \
             reloads-when-pull=yes, handles-back-key=yes, error-page-hidden=yes, \
             console-log-enabled=yes, style=web
 =object blank: style=blank_top
@@ -17,6 +17,7 @@
 =end right
 =end toolbar
 
+=object cell: id=cell.message, hidden=yes, style=cell_message
 =object cell: id=cell.settings, display-unit=settings, hidden=yes, loads-when-hide=yes, style=cell_settings
 
 =end catalog

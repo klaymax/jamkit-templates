@@ -1,10 +1,11 @@
 var module = (function() {
     const wallet = require("wallet-api"),
+          accounts = require("accounts-api"),
           klaytn = require("klaytn-api"),
           webjs = require("webjs-helper");
 
     global["klaytn_get_account_address"] = function(params) {
-        wallet.get_account_address()
+        wallet.get_account_address("klaytn")
             .then(function(result) {
                 webjs.callback(params["resolve"], result);
             })
@@ -14,7 +15,7 @@ var module = (function() {
     }
     
     global["klaytn_get_network_id"] = function(params) {
-        wallet.get_network_id()
+        wallet.get_network_id("klaytn")
             .then(function(result) {
                 webjs.callback(params["resolve"], result);
             })
@@ -36,17 +37,37 @@ var module = (function() {
                 .catch(function(error) {
                     webjs.callback(params["reject"], error);
                 });
-        } else {
-            var { method, params: rpc_params } = request;
 
-            klaytn.api.request(method, rpc_params)
+            return;
+        }
+
+        if (request["method"] === "wallet_watchAsset") {
+            var { options } = request["params"];
+            var { address, symbol, decimals } = options;
+
+            klaytn.kip7.name(address)
+                .then(function(name) {
+                    return accounts.add_token(address, name, symbol, decimals);
+                })
                 .then(function(response) {
                     webjs.callback(params["resolve"], response);
                 })
                 .catch(function(error) {
                     webjs.callback(params["reject"], error);
                 });
+
+            return;
         }
+
+        var { method, params: rpc_params } = request;
+
+        klaytn.api.request(method, rpc_params)
+            .then(function(response) {
+                webjs.callback(params["resolve"], response);
+            })
+            .catch(function(error) {
+                webjs.callback(params["reject"], error);
+            });
     }
 
     return {
@@ -59,7 +80,7 @@ var module = (function() {
         inject: function() {
             var dir_path = this.__ENV__["dir-path"];
 
-            webjs.import(dir_path + "/klaytn.js");
+            webjs.import(dir_path + "/kaikas.js");
             webjs.import(dir_path + "/caver.js");
         },
     }

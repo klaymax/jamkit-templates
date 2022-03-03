@@ -11,6 +11,7 @@ var module = (function() {
 
     return {
         call: function(from, to, data, value) {
+            console.log("call: " + JSON.stringify([from, to, data, value]));
             return actions.invoke_app("__MAIN__", "api__klaytn_broadcast_call", {
                 "from": from,
                 "to": to,
@@ -26,7 +27,6 @@ var module = (function() {
         },
 
         send: function(transaction) {
-            console.log("send: " + JSON.stringify(transaction));
             return actions.invoke_app("__MAIN__", "api__klaytn_broadcast_send", {
                 "transaction": JSON.stringify(transaction)
             })

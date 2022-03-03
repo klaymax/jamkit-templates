@@ -3,6 +3,7 @@ import themes.sbss
 if $SCREEN_WIDTH > 4.7
     $_TOP_BLANK_HEIGHT = 3dp
     $_PROGRESS_HEIGHT = 2dp
+    $_MESSAGE_HEIGHT = 100dp
     $_TOOLBAR_HEIGHT = 44dp
     $_TOOLBAR_MARGIN = 10dp
     $_ACCOUNT_SBML_WIDTH = (1pw-(36dp*2+10dp*3))
@@ -10,6 +11,7 @@ if $SCREEN_WIDTH > 4.7
 else
     $_TOP_BLANK_HEIGHT = 3dp
     $_PROGRESS_HEIGHT = 2dp
+    $_MESSAGE_HEIGHT = 100dp
     $_TOOLBAR_HEIGHT = 44dp
     $_TOOLBAR_MARGIN = 10dp
     $_ACCOUNT_SBML_WIDTH = (1pw-(36dp*2+10dp*3))
@@ -29,6 +31,7 @@ end
 #sbml_account: width=$_ACCOUNT_SBML_WIDTH, height=1ph, position=abs, gravity=left, x=$_TOOLBAR_MARGIN
 #btn_toolbar: width=$_TOOLBAR_BUTTON_SIZE, height=$_TOOLBAR_BUTTON_SIZE, vertical-align=middle
 
+#cell_message: width=1pw, height=$_MESSAGE_HEIGHT, position=abs, gravity=top, y=1sbh
 #cell_settings: width=1pw, height=1ph-$_TOOLBAR_HEIGHT, position=abs, gravity=top
 
 /catalog: page-background-color=$THEME_COLOR_BACKGROUND, text-color=$THEME_COLOR_TEXT

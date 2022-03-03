@@ -1,0 +1,7 @@
+=begin cell: script-when-loaded=on_loaded
+
+=begin message
+${message}
+=end message
+
+=end cell

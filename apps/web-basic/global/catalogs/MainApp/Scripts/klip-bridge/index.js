@@ -30,7 +30,7 @@ var module = (function() {
                 var request = _requests[request_key];
                 
                 if (request && request["type"] === "auth") {
-                    wallet.get_account_address()
+                    wallet.get_account_address("klaytn")
                         .then(function(address) {
                             Object.assign(request["result"], {
                                 "status": "completed",

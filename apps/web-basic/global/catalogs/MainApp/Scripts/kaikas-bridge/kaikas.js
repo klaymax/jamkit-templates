@@ -91,10 +91,6 @@ window.klaytn = (function() {
             console.log("removeListener: " + eventName + ":" + callback);
         },
         
-        wallet_watchAsset: function() {
-            console.log("wallet_watchAsset");
-        },
-        
         _kaikas: {
             isEnabled: function() {
                 return true;

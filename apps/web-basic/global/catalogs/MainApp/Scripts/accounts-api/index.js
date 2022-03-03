@@ -29,6 +29,23 @@ var module = (function() {
                     return _reject(error);
                 });
         },
+
+        add_token: function(address, name, symbol, decimals) {
+            return actions.invoke_app("__MAIN__", "api__accounts_add_token", {
+                "token": JSON.stringify({
+                    "address": address,
+                    "name": name,
+                    "symbol": symbol,
+                    "decimals": decimals
+                })
+            })
+                .then(function(result) {
+                    return _resolve(result);
+                })
+                .catch(function(error) {
+                    return _reject(error);
+                });
+        },
     }
 })();
 

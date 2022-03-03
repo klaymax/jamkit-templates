@@ -23,9 +23,9 @@ end
 #btn_action: width=$_ACTION_BUTTON_WIDTH, height=$_ACTION_BUTTON_HEIGHT, margin="0 $_ACTION_BUTTON_MARGIN", \
         label-font-family=@{$SANS_REGULAR}, label-font-size=$_ACTION_BUTTON_TEXT_SIZE, \
         label-color=$COLOR_WHITE, highlight-label-color=$COLOR_DARK_WHITE, \
-        content-background-color=$THEME_COLOR_KLAYMAX
-#btn_cancel: style=btn_action, label-color=$THEME_COLOR_KLAYMAX, highlight-label-color=$COLOR_GRAY, \
-        content-border-width=1dp, content-border-color=$THEME_COLOR_KLAYMAX, content-background-color=$COLOR_WHITE
+        content-background-color=$THEME_COLOR_KMINT
+#btn_cancel: style=btn_action, label-color=$THEME_COLOR_KMINT, highlight-label-color=$COLOR_GRAY, \
+        content-border-width=1dp, content-border-color=$THEME_COLOR_KMINT, content-background-color=$COLOR_WHITE
 #btn_ok: style=btn_action
 
 /sheet/message: margin="0 $_MESSAGE_MARGIN", font-family=@{$SANS_MEDIUM}, font-size=$_MESSAGE_TEXT_SIZE, text-align=center

@@ -1,0 +1,14 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+    $_MESSAGE_MARGIN = 20dp
+    $_MESSAGE_PADDING = 10dp
+    $_MESSAGE_TEXT_SIZE = 1.2
+else
+    $_MESSAGE_MARGIN = 20dp
+    $_MESSAGE_PADDING = 10dp
+    $_MESSAGE_TEXT_SIZE = 1.1
+end
+
+/cell/message: margin=$_MESSAGE_MARGIN, padding=$_MESSAGE_PADDING, background-color=$THEME_COLOR_BACKGROUND, \
+    font-family=@{$SANS_MEDIUM}, font-size=$_MESSAGE_TEXT_SIZE, text-align=center

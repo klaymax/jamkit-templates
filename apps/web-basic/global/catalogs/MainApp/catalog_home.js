@@ -5,6 +5,7 @@ const kaikas   = require("kaikas-bridge"),
       webjs    = require("webjs-helper"),
       settings = require("settings"),
       dialog   = require("dialog"),
+      message  = require("message"),
       config   = include("./config.json");
 
 var _klaytn_send_request = global["klaytn_send_request"];
@@ -49,8 +50,13 @@ function on_loaded() {
 
 function on_web_start(data) {
     if (data["is-for-main-frame"] === "yes") {
-        kaikas.initialize("web", "__$_bridge");
-        kaikas.inject();
+        if (config["wallet"] === "klip") {
+            klip.initialize("web", "__$_bridge");
+            klip.inject();
+        } else {
+            kaikas.initialize("web", "__$_bridge");
+            kaikas.inject();
+        }
     }
 }
 
@@ -92,13 +98,25 @@ function on_web_failed(data) {
 }
 
 function on_web_prevent(data) {
-    console.log("on_web_prevent: " + JSON.stringify(data));
+    if (data["url"].startsWith("intent://klipwallet")) {
+        console.log("on_web_prevent: " + data["query"])
+        var m =  data["query"].match(/request_key=([^?&=]+)/);
+
+        if (m) {
+            klip.connect(m[1]);
+        }
+
+        return;
+    }
 }
 
 function change_account() {
     accounts.change_account()
-        .then(function({ name, address }) {
-            _update_account_sbml(name, address);
+        .then(function({ account }) {
+            return JSON.parse(account);
+        })
+        .then(function({ name, accounts }) {
+            _update_account_sbml(name, accounts[config["chain"]]["address"]);
             view.object("web").action("reload");
         });
 }
@@ -137,8 +155,11 @@ function close() {
 
 function _update_current_account() {
     accounts.get_current_account()
-        .then(function({ name, address }) {
-            _update_account_sbml(name, address);
+        .then(function({ account }) {
+            return JSON.parse(account);
+        })
+        .then(function({ name, accounts }) {
+            _update_account_sbml(name, accounts[config["chain"]]["address"]);
         });
 }
 
@@ -151,14 +172,16 @@ function _update_account_sbml(name, address) {
 }
 
 function _connect_to_wallet() {
-    webjs.call("connectToWallet")
+    webjs.call("connectToWallet", [ config["wallet"] ])
         .then(function() {
             if (config["notify-wallet-connected"]) {
                 controller.action("toast", {
                     "message": controller.catalog().string("Your wallet is connected.")
                 });    
             }
-        })
+        });
+    
+    //message.show("cell.message", "Please wait to connecting...")
 }
 
 function _show_settings() {

@@ -1,6 +1,18 @@
 var module = (function() {
     const _padding_string = "0000000000000000000000000000000000000000000000000000000000000000";
 
+    function _value_to_hex(value) {
+        if (typeof(value) === "string") {
+            if (value.startsWith("0x")) {
+                return value.replace("0x", "");
+            }
+
+            return new BigNumber(value, 10).toString(16);
+        }
+
+        return value.toString(16);
+    }
+
     function _prepend_padding(value, digits) {
         return _padding_string.substring(0, digits - value.length) + value;
     }
@@ -12,9 +24,9 @@ var module = (function() {
     return {
         "uint256": {
             encode: function(value) {
-                var string = value.toString(16);
+                var hex = _value_to_hex(value);
                 
-                return _prepend_padding(string, 64);
+                return _prepend_padding(hex, 64);
             },
 
             decode: function(value) {
@@ -30,9 +42,9 @@ var module = (function() {
 
         "uint8": {
             encode: function(value) {
-                var string = value.toString(16);
+                var hex = _value_to_hex(value);
                 
-                return _prepend_padding(string, 64);
+                return _prepend_padding(hex, 64);
             },
 
             decode: function(value) {
@@ -48,9 +60,9 @@ var module = (function() {
 
         "address": {
             encode: function(value) {
-                var string = value.replace("0x", "");
-
-                return _prepend_padding(string, 64);
+                var hex = _value_to_hex(value);
+                
+                return _prepend_padding(hex, 64);
             },
 
             decode: function(value) {
@@ -66,9 +78,9 @@ var module = (function() {
 
         "bool": {
             encode: function(value) {
-                var string = value ? "1" : "0";
+                var hex = value ? "1" : "0";
 
-                return _prepend_padding(string, 64);
+                return _prepend_padding(hex, 64);
             },
 
             decode: function(value) {

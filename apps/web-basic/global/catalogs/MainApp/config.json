@@ -1,5 +1,7 @@
 {
     "url": "",
+    "wallet": "kaikas",
+    "chain": "klaytn",
     "needs-auto-connect": true,
     "notify-wallet-connected": true
 }

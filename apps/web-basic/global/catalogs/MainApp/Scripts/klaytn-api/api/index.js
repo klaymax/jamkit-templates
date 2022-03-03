@@ -10,6 +10,18 @@ var module = (function() {
     }
 
     return {
+        get_transaction_receipt: function(tx_hash) {
+            return actions.invoke_app("__MAIN__", "api__klaytn_api_get_transaction_receipt", {
+                "tx_hash": tx_hash
+            })
+                .then(function(result) {
+                    return _resolve(result);
+                })
+                .catch(function(error) {
+                    return _reject(error);
+                });
+        },
+
         call: function(to, data, block="latest") {
             return actions.invoke_app("__MAIN__", "api__klaytn_api_call", {
                 "to": to,

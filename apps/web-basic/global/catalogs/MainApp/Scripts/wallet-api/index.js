@@ -10,9 +10,12 @@ var module = (function() {
     }
 
     return {
-        get_account_address: function() {
-            return actions.invoke_app("__MAIN__", "api__wallet_get_account_address")
+        get_account_address: function(chain) {
+            return actions.invoke_app("__MAIN__", "api__wallet_get_account_address", {
+                "chain": chain
+            })
                 .then(function(result) {
+                    console.log(JSON.stringify(result))
                     return _resolve(result);
                 })
                 .catch(function(error) {
@@ -20,8 +23,10 @@ var module = (function() {
                 });
         },
 
-        get_network_id: function() {
-            return actions.invoke_app("__MAIN__", "api__wallet_get_network_id")
+        get_network_id: function(chain) {
+            return actions.invoke_app("__MAIN__", "api__wallet_get_network_id", {
+                "chain": chain
+            })
                 .then(function(result) {
                     return _resolve(result);
                 })
