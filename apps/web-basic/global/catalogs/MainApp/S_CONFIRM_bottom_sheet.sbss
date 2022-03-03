@@ -28,7 +28,7 @@ end
         content-border-width=1dp, content-border-color=$THEME_COLOR_KMINT, content-background-color=$COLOR_WHITE
 #btn_ok: style=btn_action
 
-/sheet/message: margin="0 $_MESSAGE_MARGIN", font-family=@{$SANS_MEDIUM}, font-size=$_MESSAGE_TEXT_SIZE, text-align=center
+/sheet/message: margin="0 $_MESSAGE_MARGIN", font-family=@{$SANS_MEDIUM}, font-size=$_MESSAGE_TEXT_SIZE, text-align=center, line-break-mode=word-wrap
 /sheet/buttons: margin="$_BUTTONS_TOP_MARGIN 0 $_BUTTONS_BOTTOM_MARGIN 0", text-align=center
 
 if "${ok-label}" != ""
