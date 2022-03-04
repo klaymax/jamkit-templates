@@ -11,7 +11,7 @@ var module = (function() {
 
     return {
         get_transaction_receipt: function(tx_hash) {
-            return actions.invoke_app("__MAIN__", "api__klaytn_api_get_transaction_receipt", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_api_get_transaction_receipt", {
                 "tx_hash": tx_hash
             })
                 .then(function(result) {
@@ -23,7 +23,7 @@ var module = (function() {
         },
 
         call: function(to, data, block="latest") {
-            return actions.invoke_app("__MAIN__", "api__klaytn_api_call", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_api_call", {
                 "to": to,
                 "data": data,
                 "block": block
@@ -37,7 +37,7 @@ var module = (function() {
         },
 
         request: function(method, params) {
-            return actions.invoke_app("__MAIN__", "api__klaytn_api_request", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_api_request", {
                 "method": method,
                 "params": JSON.stringify(params)
             })

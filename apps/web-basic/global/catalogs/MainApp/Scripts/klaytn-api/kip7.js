@@ -7,7 +7,7 @@ var module = (function() {
     
     return {
         name: function(token) {
-            return actions.invoke_app("__MAIN__", "api__klaytn_kip7_name", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_kip7_name", {
                 "token": token
             })
                 .then(function(result) {
@@ -16,7 +16,7 @@ var module = (function() {
         },
 
         symbol: function(token) {
-            return actions.invoke_app("__MAIN__", "api__klaytn_kip7_symbol", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_kip7_symbol", {
                 "token": token
             })
                 .then(function(result) {
@@ -25,7 +25,7 @@ var module = (function() {
         },
 
         decimals: function(token) {
-            return actions.invoke_app("__MAIN__", "api__klaytn_kip7_decimals", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_kip7_decimals", {
                 "token": token
             })
                 .then(function(result) {

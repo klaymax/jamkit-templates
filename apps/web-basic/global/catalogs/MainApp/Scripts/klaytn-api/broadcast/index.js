@@ -12,7 +12,7 @@ var module = (function() {
     return {
         call: function(from, to, data, value) {
             console.log("call: " + JSON.stringify([from, to, data, value]));
-            return actions.invoke_app("__MAIN__", "api__klaytn_broadcast_call", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_broadcast_call", {
                 "from": from,
                 "to": to,
                 "data": data,
@@ -27,7 +27,7 @@ var module = (function() {
         },
 
         send: function(transaction) {
-            return actions.invoke_app("__MAIN__", "api__klaytn_broadcast_send", {
+            return actions.invoke_app("__MAIN__", "api__web3_klaytn_broadcast_send", {
                 "transaction": JSON.stringify(transaction)
             })
                 .then(function(result) {
