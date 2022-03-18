@@ -7,6 +7,7 @@ var module = (function() {
     global["__KLAYTN__"].broadcast = include("./broadcast/index.js");
     global["__KLAYTN__"].abi       = include("./abi/index.js");
     global["__KLAYTN__"].kip7      = include("./kip7.js");
+    global["__KLAYTN__"].token     = global["__KLAYTN__"].kip7;
 
     return Object.assign({
         
