@@ -1,0 +1,7 @@
+import themes.sbss
+
+if $SCREEN_WIDTH > 4.7
+else
+end
+
+/catalog: page-background-color=$THEME_COLOR_BACKGROUND, text-color=$THEME_COLOR_TEXT
