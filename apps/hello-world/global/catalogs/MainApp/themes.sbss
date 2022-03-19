@@ -28,6 +28,14 @@ $SERIF_BOLDITALIC = NotoSerif-BoldItalic
 $SERIF_BLACK = NotoSerif-Black
 $SERIF_BLACKITALIC = NotoSerif-BlackItalic
 
+-- fonts for number --
+$SANS_NUMBER_THIN = Poppins-Thin
+$SANS_NUMBER_REGULAR = Poppins-Regular
+$SANS_NUMBER_MEDIUM = Poppins-Medium
+$SANS_NUMBER_SEMIBOLD = Poppins-SemiBold
+$SANS_NUMBER_BOLD = Poppins-Bold
+$SANS_NUMBER = monospace NotoSans-Regular
+
 -- fonts for Korean --
 $SANS_KR_BOLD = NotoSansKR-Bold
 $SANS_KR_MEDIUM = NotoSansKR-Medium
