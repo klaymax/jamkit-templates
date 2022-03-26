@@ -11,6 +11,7 @@ const kaikas   = require("kaikas-bridge"),
 var _klaytn_send_request = global["klaytn_send_request"];
 var _settings_visible = false;
 var _close_button_pressed = false;
+var _wallet_connected = false;
 
 function _klaytn_send_request_safely(params, request) {
     var { method, params: rpc_params } = request;
@@ -86,7 +87,9 @@ function on_web_loaded(data) {
             storage.value("AUTO-CONNECT.PROMPTED", true);
         } else {
             if (settings.is_auto_connect()) {
-                _connect_to_wallet();
+                if (!_wallet_connected || config["reconnect-when-reload"]) {
+                    _connect_to_wallet();
+                }
             }
         }
     }
@@ -185,6 +188,8 @@ function _connect_to_wallet() {
                     "message": controller.catalog().string("Your wallet is connected.")
                 });    
             }
+
+            _wallet_connected = true;
         });
     
     //message.show("cell.message", "Please wait to connecting...")

@@ -4,5 +4,6 @@
     "wallet": "kaikas",
     "chain": "klaytn",
     "needs-auto-connect": true,
+    "reconnect-when-reload": true,
     "notify-wallet-connected": true
 }
