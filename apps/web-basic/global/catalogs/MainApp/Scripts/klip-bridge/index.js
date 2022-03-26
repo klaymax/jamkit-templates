@@ -31,7 +31,7 @@ var module = (function() {
                 
                 if (request && request["type"] === "auth") {
                     wallet.get_account_address("klaytn")
-                        .then(function(address) {
+                        .then(function(address) {                    
                             Object.assign(request["result"], {
                                 "status": "completed",
                                 "result": {
@@ -114,7 +114,7 @@ var module = (function() {
         });
     }
 
-    function _parse_klip_command(url, options) {
+    function _parse_klip_command(url, options={}) {
         var { path, query } = parse("url", url);
         var command = path.split('/').reverse()[0];
         var params = JSON.parse(options["body"] || "{}");
@@ -157,7 +157,7 @@ var module = (function() {
 
     global["klip_fetch_request"] = function(params) {
         var { url, options } = JSON.parse(params["params"]);
-        var [ command, cmd_params ] = _parse_klip_command(url, options || {});
+        var [ command, cmd_params ] = _parse_klip_command(url, options);
 
         _handle_klip_command(command, cmd_params)
             .then(function(result) {

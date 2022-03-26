@@ -15,7 +15,6 @@ var module = (function() {
                 "chain": chain
             })
                 .then(function(result) {
-                    console.log(JSON.stringify(result))
                     return _resolve(result);
                 })
                 .catch(function(error) {
