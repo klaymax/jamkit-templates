@@ -126,7 +126,12 @@ function change_account() {
         })
         .then(function({ name, accounts }) {
             _update_account_sbml(name, accounts[config["chain"]]["address"]);
-            view.object("web").action("reload");
+
+            if (config["reconnect-when-reload"]) {
+                view.object("web").action("reload");
+            } else {
+                _reconnect_to_wallet();
+            }
         });
 }
 
@@ -192,6 +197,25 @@ function _connect_to_wallet() {
             _wallet_connected = true;
         });
     
+    _wallet_connected = false;
+    
+    //message.show("cell.message", "Please wait to connecting...")
+}
+
+function _reconnect_to_wallet() {
+    webjs.call("reconnectToWallet", [ config["wallet"] ])
+        .then(function() {
+            if (config["notify-wallet-connected"]) {
+                controller.action("toast", {
+                    "message": controller.catalog().string("Your wallet is connected.")
+                });    
+            }
+
+            _wallet_connected = true;
+        });
+    
+    _wallet_connected = false;
+
     //message.show("cell.message", "Please wait to connecting...")
 }
 

@@ -1,6 +1,7 @@
 =begin catalog: script-when-loaded=on_loaded
 
-=object web: id=web, javascript-bridge="__$_bridge", content-script@start=cleanup_contents.js, uses-browser-user-agent=yes, \
+=object web: id=web, javascript-bridge="__$_bridge", headers="HTTP_REFERER=kmint", \
+            content-script@start=cleanup_contents.js, uses-browser-user-agent=yes, \
             script-when-start=on_web_start, script-when-loaded=on_web_loaded, script-when-failed=on_web_failed, \
             disallowed-url-patterns="klayswap\\.com,intent://klipwallet", script-when-prevent=on_web_prevent, \
             reloads-when-pull=yes, handles-back-key=yes, error-page-hidden=yes, \

@@ -1,3 +1,3 @@
-function connectToWallet(onResult, onError) {
+function connectToWallet(wallet, onResult, onError) {
     /* TODO: implement auto connect function.  */
 }
