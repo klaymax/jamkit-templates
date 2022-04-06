@@ -6,8 +6,8 @@
     description: "${APP_DESCRIPTION}",
     localization: {
         ko: {
-            title: "${APP_TITLE}",
-            description: "${APP_DESCRIPTION}"
+            title: "${KO_APP_TITLE}",
+            description: "${KO_APP_DESCRIPTION}"
         }
     }
 }
