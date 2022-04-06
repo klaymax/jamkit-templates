@@ -1,7 +1,7 @@
 {
     id: "${APP_ID}",
-    language: en,
-    version: 1.0,
+    language: "${LANGUAGE}",
+    version: ${VERSION},
     title: "${APP_TITLE}",
     description: "${APP_DESCRIPTION}",
     localization: {
