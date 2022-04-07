@@ -1,4 +1,5 @@
-const kaikas   = require("kaikas-bridge"),
+const metamask = require("metamask-bridge"),
+      kaikas   = require("kaikas-bridge"),
       klip     = require("klip-bridge"),
       accounts = require("accounts-api"),
       webjs    = require("webjs-helper"),
@@ -27,7 +28,7 @@ function on_loaded() {
 
 function on_web_start(data) {
     if (data["is-for-main-frame"] === "yes") {
-        _initialize_wallet(config["wallet"]);
+        _initialize_wallet();
     }
 }
 
@@ -131,7 +132,16 @@ function close() {
     }
 }
 
-function _initialize_wallet(wallet) {
+function _initialize_wallet() {
+    var { wallet, chain } = config;
+
+    if (wallet === 'metamask') {
+        metamask.initialize("web", "__$_bridge", chain);
+        metamask.inject();
+
+        return;
+    }
+
     if (wallet === 'kaikas') {
         kaikas.initialize("web", "__$_bridge");
         kaikas.inject();
