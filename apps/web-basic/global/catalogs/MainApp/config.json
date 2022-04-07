@@ -1,6 +1,6 @@
 {
     "url": "",
-    "desktop-mode": true,
+    "desktop-mode": false,
     "wallet": "kaikas",
     "chain": "klaytn",
     "needs-auto-connect": true,
