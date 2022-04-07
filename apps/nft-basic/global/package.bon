@@ -1,13 +1,13 @@
 {
     id: "${APP_ID}",
-    language: en,
-    version: 1.0,
+    language: "${LANGUAGE}",
+    version: ${VERSION},
     title: "${APP_TITLE}",
     description: "${APP_DESCRIPTION}",
     localization: {
         ko: {
-            title: "${APP_TITLE}",
-            description: "${APP_DESCRIPTION}"
+            title: "${KO_APP_TITLE}",
+            description: "${KO_APP_DESCRIPTION}"
         }
     }
 }
