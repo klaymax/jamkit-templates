@@ -1,6 +1,5 @@
 const kaikas   = require("kaikas-bridge"),
       klip     = require("klip-bridge"),
-      klaytn   = require("klaytn-api"),
       accounts = require("accounts-api"),
       webjs    = require("webjs-helper"),
       settings = require("settings"),
@@ -8,38 +7,9 @@ const kaikas   = require("kaikas-bridge"),
       message  = require("message"),
       config   = include("./config.json");
 
-var _klaytn_send_request = global["klaytn_send_request"];
 var _settings_visible = false;
 var _close_button_pressed = false;
 var _wallet_connected = false;
-
-function _klaytn_send_request_safely(params, request) {
-    var { method, params: rpc_params } = request;
-
-    klaytn.api.request(method, rpc_params)
-        .then(function(response) {
-            if (!response["result"]) {
-                timeout(0.2, function() {
-                    _klaytn_send_request_safely(params, request);
-                });
-            } else {
-                webjs.callback(params["resolve"], response);
-            }
-        })
-        .catch(function(error) {
-            webjs.callback(params["reject"], error);
-        });    
-}
-
-global["klaytn_send_request"] = function(params) {
-    var request = JSON.parse(params["params"]);
-    
-    if ([ "klay_getTransactionReceipt" ].includes(request["method"])) {
-        _klaytn_send_request_safely(params, request);
-    } else {
-        _klaytn_send_request(params);
-    }
-}
 
 function on_loaded() {
     if (config["desktop-mode"]) {
@@ -164,6 +134,22 @@ function close() {
         _close_button_pressed = true;
     } else {
         controller.action("app-close");
+    }
+}
+
+function _initialize_wallet(wallet) {
+    if (wallet === 'kaikas') {
+        kaikas.initialize("web", "__$_bridge");
+        kaikas.inject();
+
+        return;
+    }
+
+    if (wallet === "klip") {
+        klip.initialize("web", "__$_bridge");
+        klip.inject();
+
+        return;
     }
 }
 

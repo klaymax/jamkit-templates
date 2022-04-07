@@ -2,9 +2,9 @@ window.klaytn = (function() {
     var _account = "", _network_id = 0;
     var _auto_refresh_on_network_change = true;
 
-    function _klaytn_get_account_address() {
+    function _kaikas_get_account_address() {
         return new Promise(function(resolve, reject) {
-            webjs.call("klaytn_get_account_address")
+            webjs.call("kaikas_get_account_address")
                 .then(function(result) {
                     resolve(result);
                 })
@@ -14,9 +14,9 @@ window.klaytn = (function() {
         });
     }
 
-    function _klaytn_get_network_id() {
+    function _kaikas_get_network_id() {
         return new Promise(function(resolve, reject) {
-            webjs.call("klaytn_get_network_id")
+            webjs.call("kaikas_get_network_id")
                 .then(function(result) {
                     resolve(result);
                 })
@@ -26,9 +26,9 @@ window.klaytn = (function() {
         });
     }
 
-    function _klaytn_send_request(request) {
+    function _kaikas_send_request(request) {
         return new Promise(function(resolve, reject) {
-            webjs.call("klaytn_send_request", request)
+            webjs.call("kaikas_send_request", request)
                 .then(function(response) {
                     resolve(Object.assign(response, {
                         "id": request["id"]
@@ -41,7 +41,7 @@ window.klaytn = (function() {
     }
 
     function _update_network_id() {
-        _klaytn_get_network_id()
+        _kaikas_get_network_id()
             .then(function(network_id) {
                 _network_id = network_id;
             })
@@ -54,7 +54,7 @@ window.klaytn = (function() {
 
     return {
         enable: function() {
-            return _klaytn_get_account_address()
+            return _kaikas_get_account_address()
                 .then(function(address) {
                     return Promise.resolve([ _account = address ]);
                 })
@@ -64,7 +64,7 @@ window.klaytn = (function() {
         },
 
         send: function(request, callback) {
-            _klaytn_send_request(request)
+            _kaikas_send_request(request)
                 .then(function(response) {
                     callback(null, response);
                 })
@@ -74,7 +74,7 @@ window.klaytn = (function() {
         },
 
         sendAsync: function(request, callback) {
-            _klaytn_send_request(request)
+            _kaikas_send_request(request)
                 .then(function(response) {
                     callback(null, response);
                 })
