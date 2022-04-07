@@ -27,13 +27,7 @@ function on_loaded() {
 
 function on_web_start(data) {
     if (data["is-for-main-frame"] === "yes") {
-        if (config["wallet"] === "klip") {
-            klip.initialize("web", "__$_bridge");
-            klip.inject();
-        } else {
-            kaikas.initialize("web", "__$_bridge");
-            kaikas.inject();
-        }
+        _initialize_wallet(config["wallet"]);
     }
 }
 
