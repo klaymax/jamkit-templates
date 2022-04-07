@@ -1,7 +1,7 @@
 {
-	id: "${APP_ID}",
+    id: "${APP_ID}",
     language: "${LANGUAGE}",
     version: ${VERSION},
-	title: "${APP_TITLE}",
-	description: "${APP_DESCRIPTION}"
+    title: "${APP_TITLE}",
+    description: "${APP_DESCRIPTION}"
 }
