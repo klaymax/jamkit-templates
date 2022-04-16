@@ -1,13 +1,20 @@
 var module = (function() {
-    const wallet  = require("wallet-api"),
-          binance = require("binance-api"),
-          webjs   = require("webjs-helper");
+    const wallet   = require("wallet-api"),
+          ethereum = require("ethereum-api"),
+          binance  = require("binance-api"),
+          webjs    = require("webjs-helper");
 
     var _chain = "";
     var _web3 = {};
 
     global["metamask_send_request"] = function(params) {
         var request = JSON.parse(params["params"]);
+
+        if (request["method"] === "eth_accounts") {
+            _get_account_address(params);
+
+            return;
+        }
 
         if (request["method"] === "eth_sendTransaction") {
             _send_transaction(params, request);
@@ -34,10 +41,6 @@ var module = (function() {
         _get_account_address(params);
     }
     
-    global["metamask_get_network_id"] = function(params) {
-        _get_network_id(params);
-    }
-
     function _send_request(params, request) {
         var { method, params: rpc_params } = request;
 
@@ -98,18 +101,8 @@ var module = (function() {
 
     function _get_account_address(params) {
         wallet.get_account_address(_chain)
-            .then(function(result) {
-                webjs.callback(params["resolve"], result);
-            })
-            .catch(function(error) {
-                webjs.callback(params["reject"], error);
-            });
-    }
-
-    function _get_network_id(params) {
-         wallet.get_network_id(_chain)
-            .then(function(result) {
-                webjs.callback(params["resolve"], result);
+            .then(function(address) {
+                webjs.callback(params["resolve"], { "result": [ address ] });
             })
             .catch(function(error) {
                 webjs.callback(params["reject"], error);
@@ -136,10 +129,11 @@ var module = (function() {
             return this;
         },
 
-        inject: function() {
+        inject: function(network_id) {
             var dir_path = this.__ENV__["dir-path"];
 
             webjs.import(dir_path + "/metamask.js");
+            webjs.call("ethereum.initialize", [ network_id ]);
         },
     }
 })();

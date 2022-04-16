@@ -2,12 +2,14 @@ const metamask = require("metamask-bridge"),
       kaikas   = require("kaikas-bridge"),
       klip     = require("klip-bridge"),
       accounts = require("accounts-api"),
+      wallet   = require("wallet-api"),
       webjs    = require("webjs-helper"),
       settings = require("settings"),
       dialog   = require("dialog"),
       message  = require("message"),
       config   = include("./config.json");
 
+var _network_id = 0;
 var _settings_visible = false;
 var _close_button_pressed = false;
 var _wallet_connected = false;
@@ -19,9 +21,14 @@ function on_loaded() {
         });
     }
 
-    view.object("web").property({
-        "url": config["url"]
-    });
+    wallet.get_network_id(config["chain"])
+        .then(function(network_id) {
+            _network_id = network_id;
+
+            view.object("web").property({
+                "url": config["url"]
+            });        
+        });
 
     _update_current_account();
 }
@@ -137,21 +144,21 @@ function _initialize_wallet() {
 
     if (wallet === 'metamask') {
         metamask.initialize("web", "__$_bridge", chain);
-        metamask.inject();
+        metamask.inject(_network_id);
 
         return;
     }
 
     if (wallet === 'kaikas') {
         kaikas.initialize("web", "__$_bridge");
-        kaikas.inject();
+        kaikas.inject(_network_id);
 
         return;
     }
 
     if (wallet === "klip") {
         klip.initialize("web", "__$_bridge");
-        klip.inject();
+        klip.inject(_network_id);
 
         return;
     }

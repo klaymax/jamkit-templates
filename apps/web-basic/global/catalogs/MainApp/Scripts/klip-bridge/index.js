@@ -5,6 +5,19 @@ var module = (function() {
 
     var _requests = {};
 
+    global["klip_fetch_request"] = function(params) {
+        var { url, options } = JSON.parse(params["params"]);
+        var [ command, cmd_params ] = _parse_klip_command(url, options);
+
+        _handle_klip_command(command, cmd_params)
+            .then(function(result) {
+                webjs.callback(params["resolve"], result);
+            })
+            .catch(function(error) {
+                webjs.callback(params["reject"], error);
+            });
+    }
+
     function _handle_klip_command(command, params) {
         return new Promise(function(resolve, reject) {
             if (command === "prepare") {
@@ -155,19 +168,6 @@ var module = (function() {
         });
     }
 
-    global["klip_fetch_request"] = function(params) {
-        var { url, options } = JSON.parse(params["params"]);
-        var [ command, cmd_params ] = _parse_klip_command(url, options);
-
-        _handle_klip_command(command, cmd_params)
-            .then(function(result) {
-                webjs.callback(params["resolve"], result);
-            })
-            .catch(function(error) {
-                webjs.callback(params["reject"], error);
-            });
-    }
-
     return {
         initialize: function(id, bridge) {
             webjs.initialize(id, bridge);
@@ -175,7 +175,7 @@ var module = (function() {
             return this;
         },
 
-        inject: function() {
+        inject: function(network_id) {
             var dir_path = this.__ENV__["dir-path"];
 
             webjs.import(dir_path + "/klaytn.js");

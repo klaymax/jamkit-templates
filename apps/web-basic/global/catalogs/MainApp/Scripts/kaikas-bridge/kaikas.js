@@ -14,18 +14,6 @@ window.klaytn = (function() {
         });
     }
 
-    function _kaikas_get_network_id() {
-        return new Promise(function(resolve, reject) {
-            webjs.call("kaikas_get_network_id")
-                .then(function(result) {
-                    resolve(result);
-                })
-                .catch(function(error) {
-                    reject(error);
-                });
-        });
-    }
-
     function _kaikas_send_request(request) {
         return new Promise(function(resolve, reject) {
             webjs.call("kaikas_send_request", request)
@@ -40,22 +28,14 @@ window.klaytn = (function() {
         });
     }
 
-    function _update_network_id() {
-        _kaikas_get_network_id()
-            .then(function(network_id) {
-                _network_id = network_id;
-            })
-            .catch(function(error) {
-                _network_id = 0;
-            });
-    }
-
-    _update_network_id();
-
     return {
+        initialize: function(network_id) {
+            _network_id = network_id;
+        },
+
         enable: function() {
             return _kaikas_get_account_address()
-                .then(function(address) {
+                .then(function({ result: [ address ] }) {
                     return Promise.resolve([ _account = address ]);
                 })
                 .catch(function(error) {

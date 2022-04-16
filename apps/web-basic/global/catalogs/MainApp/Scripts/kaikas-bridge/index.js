@@ -32,10 +32,6 @@ var module = (function() {
         _get_account_address(params);
     }
     
-    global["kaikas_get_network_id"] = function(params) {
-        _get_network_id(params);
-    }
-
     function _send_request(params, request) {
         var { method, params: rpc_params } = request;
 
@@ -96,18 +92,8 @@ var module = (function() {
 
     function _get_account_address(params) {
         wallet.get_account_address("klaytn")
-            .then(function(result) {
-                webjs.callback(params["resolve"], result);
-            })
-            .catch(function(error) {
-                webjs.callback(params["reject"], error);
-            });
-    }
-
-    function _get_network_id(params) {
-         wallet.get_network_id("klaytn")
-            .then(function(result) {
-                webjs.callback(params["resolve"], result);
+            .then(function(address) {
+                webjs.callback(params["resolve"], { "result": [ address ] });
             })
             .catch(function(error) {
                 webjs.callback(params["reject"], error);
@@ -121,11 +107,12 @@ var module = (function() {
             return this;
         },
 
-        inject: function() {
+        inject: function(network_id) {
             var dir_path = this.__ENV__["dir-path"];
 
             webjs.import(dir_path + "/kaikas.js");
             webjs.import(dir_path + "/caver.js");
+            webjs.call("klaytn.initialize", [ network_id ]);
         },
     }
 })();

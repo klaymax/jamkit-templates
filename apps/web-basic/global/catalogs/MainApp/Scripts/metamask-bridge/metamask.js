@@ -13,18 +13,6 @@ window.ethereum = (function() {
         });
     }
 
-    function _metamask_get_network_id() {
-        return new Promise(function(resolve, reject) {
-            webjs.call("metamask_get_network_id")
-                .then(function(result) {
-                    resolve(result);
-                })
-                .catch(function(error) {
-                    reject(error);
-                });
-        });
-    }
-
     function _metamask_send_request(request) {
         return new Promise(function(resolve, reject) {
             webjs.call("metamask_send_request", request)
@@ -39,22 +27,14 @@ window.ethereum = (function() {
         });
     }
 
-    function _update_network_id() {
-        _metamask_get_network_id()
-            .then(function(network_id) {
-                _network_id = network_id;
-            })
-            .catch(function(error) {
-                _network_id = 0;
-            });
-    }
-
-    _update_network_id();
-
     return {
+        initialize: function(network_id) {
+            _network_id = network_id;
+        },
+
         enable: function() {
             return _metamask_get_account_address()
-                .then(function(address) {
+                .then(function({ result: [ address ] }) {
                     return Promise.resolve([ _account = address ]);
                 })
                 .catch(function(error) {
