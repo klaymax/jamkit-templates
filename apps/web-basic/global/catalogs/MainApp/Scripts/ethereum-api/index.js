@@ -1,7 +1,7 @@
 var module = (function() {
     global["__ETHEREUM__"] = global["__ETHEREUM__"] || {};
 
-    global["__ETHEREUM__"].crypto    = include("./crypto/index.js");
+    global["__ETHEREUM__"].crypto    = require("crypto");
     global["__ETHEREUM__"].utils     = include("./utils/index.js");
     global["__ETHEREUM__"].api       = include("./api/index.js");
     global["__ETHEREUM__"].broadcast = include("./broadcast/index.js");

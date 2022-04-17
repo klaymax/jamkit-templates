@@ -35,7 +35,7 @@ window.klaytn = (function() {
 
         enable: function() {
             return _kaikas_get_account_address()
-                .then(function({ result: [ address ] }) {
+                .then(function(address) {
                     return Promise.resolve([ _account = address ]);
                 })
                 .catch(function(error) {

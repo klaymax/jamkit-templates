@@ -22,6 +22,12 @@ var module = (function() {
             return;
         }
 
+        if (request["method"] === "personal_sign") {
+            _sign_message(params, request);
+
+            return;
+        }
+
         if (request["method"] === "wallet_watchAsset") {
             _watch_asset(params, request);
 
@@ -81,6 +87,22 @@ var module = (function() {
             .catch(function(error) {
                 webjs.callback(params["reject"], error);
             });
+    }
+
+    function _sign_message(params, request) {
+        var [ message, account, password ] = request["params"];
+
+        _web3.broadcast.sign(_decode_hex_message(message), account, password)
+            .then(function(signature) {
+                webjs.callback(params["resolve"], { "result": signature });
+            })
+            .catch(function(error) {
+                webjs.callback(params["reject"], error);
+            });
+    }
+
+    function _decode_hex_message(message) {
+        return _web3.crypto.string_from_bits(_web3.crypto.hex_to_bits(message));
     }
 
     function _watch_asset(params, request) {

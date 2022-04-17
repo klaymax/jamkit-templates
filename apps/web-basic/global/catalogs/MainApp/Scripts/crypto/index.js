@@ -159,6 +159,10 @@ var module = (function() {
         string_to_bits: function(string) {
             return sjcl.codec.utf8String.toBits(string);
         },
+
+        string_from_bits: function(bits) {
+            return sjcl.codec.utf8String.fromBits(bits);
+        },
         
         bytes_from_bits: function(bits) {
             return sjcl.codec.bytes.fromBits(bits);

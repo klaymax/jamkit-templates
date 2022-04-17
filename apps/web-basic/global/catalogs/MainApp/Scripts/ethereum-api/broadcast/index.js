@@ -36,6 +36,20 @@ var module = (function() {
                 .catch(function(error) {
                     return _reject(error);
                 });
+        },
+
+        sign: function(message, account, password) {
+            return actions.invoke_app("__MAIN__", "api__web3_ethereum_broadcast_sign", {
+                "message": message,
+                "account": account,
+                "password": password || ""
+            })
+                .then(function(result) {
+                    return _resolve(result);
+                })
+                .catch(function(error) {
+                    return _reject(error);
+                });
         }
     }
 })();

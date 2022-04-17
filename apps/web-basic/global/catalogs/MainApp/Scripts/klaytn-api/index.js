@@ -1,7 +1,7 @@
 var module = (function() {
     global["__KLAYTN__"] = global["__KLAYTN__"] || {};
 
-    global["__KLAYTN__"].crypto    = include("./crypto/index.js");
+    global["__KLAYTN__"].crypto    = include("crypto");
     global["__KLAYTN__"].utils     = include("./utils/index.js");
     global["__KLAYTN__"].api       = include("./api/index.js");
     global["__KLAYTN__"].broadcast = include("./broadcast/index.js");

@@ -92,8 +92,8 @@ var module = (function() {
 
     function _get_account_address(params) {
         wallet.get_account_address("klaytn")
-            .then(function(address) {
-                webjs.callback(params["resolve"], { "result": [ address ] });
+            .then(function(result) {
+                webjs.callback(params["resolve"], result);
             })
             .catch(function(error) {
                 webjs.callback(params["reject"], error);
