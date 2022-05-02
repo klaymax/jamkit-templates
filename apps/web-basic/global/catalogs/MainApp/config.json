@@ -1,8 +1,8 @@
 {
-    "url": "https://minthing.co.kr/home",
+    "url": "",
     "desktop-mode": false,
-    "wallet": "kaikas",
-    "chain": "klaytn",
+    "wallet": "metamask",
+    "chain": "ethereum",
     "needs-auto-connect": true,
     "reconnect-when-reload": true,
     "notify-wallet-connected": true
