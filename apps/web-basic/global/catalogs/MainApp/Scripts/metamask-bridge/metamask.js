@@ -28,8 +28,9 @@ window.ethereum = (function() {
     }
 
     return {
-        initialize: function(network_id) {
+        initialize: function(network_id, account) {
             _network_id = network_id;
+            _account = account
         },
 
         enable: function() {
@@ -78,11 +79,15 @@ window.ethereum = (function() {
             return _account;
         },
 
-        get networkVersion() {
+        get chainId() {
             return "0x" + _network_id.toString(16);
         },
+
+        get networkVersion() {
+            return _network_id.toString();
+        },
         
-        get isMetamask() {
+        get isMetaMask() {
             return true;
         },
         

@@ -10,6 +10,7 @@ const metamask = require("metamask-bridge"),
       config   = include("./config.json");
 
 var _network_id = 0;
+var _account = "";
 var _settings_visible = false;
 var _close_button_pressed = false;
 var _wallet_connected = false;
@@ -21,16 +22,23 @@ function on_loaded() {
         });
     }
 
-    wallet.get_network_id(config["chain"])
-        .then(function(network_id) {
+    Promise.all([
+        wallet.get_network_id(config["chain"]),
+        accounts.get_current_account()
+    ])
+        .then(function([ network_id, { account } ]) {
+            return [ network_id, JSON.parse(account) ];
+        })
+        .then(function([ network_id, { name, accounts } ]) {
             _network_id = network_id;
+            _account = accounts[config["chain"]]["address"];
 
             view.object("web").property({
                 "url": config["url"]
-            });        
-        });
+            });
 
-    _update_current_account();
+            _update_account_sbml(name, _account);
+        });
 }
 
 function on_web_start(data) {
@@ -144,34 +152,24 @@ function _initialize_wallet() {
 
     if (wallet === 'metamask') {
         metamask.initialize("web", "__$_bridge", chain);
-        metamask.inject(_network_id);
+        metamask.inject(_network_id, _account);
 
         return;
     }
 
     if (wallet === 'kaikas') {
         kaikas.initialize("web", "__$_bridge");
-        kaikas.inject(_network_id);
+        kaikas.inject(_network_id, _account);
 
         return;
     }
 
     if (wallet === "klip") {
         klip.initialize("web", "__$_bridge");
-        klip.inject(_network_id);
+        klip.inject(_network_id, _account);
 
         return;
     }
-}
-
-function _update_current_account() {
-    accounts.get_current_account()
-        .then(function({ account }) {
-            return JSON.parse(account);
-        })
-        .then(function({ name, accounts }) {
-            _update_account_sbml(name, accounts[config["chain"]]["address"]);
-        });
 }
 
 function _update_account_sbml(name, address) {

@@ -29,8 +29,9 @@ window.klaytn = (function() {
     }
 
     return {
-        initialize: function(network_id) {
+        initialize: function(network_id, account) {
             _network_id = network_id;
+            _account = account;
         },
 
         enable: function() {

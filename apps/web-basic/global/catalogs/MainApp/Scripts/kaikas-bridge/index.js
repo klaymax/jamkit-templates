@@ -107,12 +107,12 @@ var module = (function() {
             return this;
         },
 
-        inject: function(network_id) {
+        inject: function(network_id, account) {
             var dir_path = this.__ENV__["dir-path"];
 
             webjs.import(dir_path + "/kaikas.js");
             webjs.import(dir_path + "/caver.js");
-            webjs.call("klaytn.initialize", [ network_id ]);
+            webjs.call("klaytn.initialize", [ network_id, account ]);
         },
     }
 })();

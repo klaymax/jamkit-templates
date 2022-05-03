@@ -1,6 +1,7 @@
 var module = (function() {
     const wallet   = require("wallet-api"),
           ethereum = require("ethereum-api"),
+          polygon  = require("polygon-api"),
           binance  = require("binance-api"),
           webjs    = require("webjs-helper");
 
@@ -10,7 +11,7 @@ var module = (function() {
     global["metamask_send_request"] = function(params) {
         var request = JSON.parse(params["params"]);
 
-        if (request["method"] === "eth_accounts") {
+        if (request["method"] === "eth_accounts" || request["method"] === "eth_requestAccounts") {
             _get_account_address(params);
 
             return;
@@ -135,6 +136,10 @@ var module = (function() {
         if (chain === "ethereum") {
             return ethereum;
         }
+        
+        if (chain === "polygon") {
+            return polygon;
+        }
 
         if (chain === "binance") {
             return binance;
@@ -151,11 +156,11 @@ var module = (function() {
             return this;
         },
 
-        inject: function(network_id) {
+        inject: function(network_id, account) {
             var dir_path = this.__ENV__["dir-path"];
 
             webjs.import(dir_path + "/metamask.js");
-            webjs.call("ethereum.initialize", [ network_id ]);
+            webjs.call("ethereum.initialize", [ network_id, account ]);
         },
     }
 })();
