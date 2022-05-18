@@ -1,5 +1,5 @@
 var module = (function () {
-    const crypto = __ETHEREUM__.crypto,
+    const crypto = __POLYGON__.crypto,
           types = include("./types.js");
 
     function _encode_signature(definition) {

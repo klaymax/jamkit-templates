@@ -25,6 +25,22 @@ var module = (function() {
                 });
         },
 
+        create: function(from, to, data, value) {
+            console.log("create: " + JSON.stringify([from, to, data, value]));
+            return actions.invoke_app("__MAIN__", "api__web3_binance_broadcast_create", {
+                "from": from,
+                "to": to,
+                "data": data,
+                "value": value
+            })
+                .then(function(result) {
+                    return _resolve(result);
+                })
+                .catch(function(error) {
+                    return _reject(error);
+                });
+        },
+
         send: function(transaction) {
             console.log("send: " + JSON.stringify(transaction));
             return actions.invoke_app("__MAIN__", "api__web3_binance_broadcast_send", {

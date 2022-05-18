@@ -1,9 +1,9 @@
 include("./bignumber.js");
 
 var module = (function() {
-    const crypto = __BINANCE__.crypto;
+    const crypto = __POLYGON__.crypto;
 
-    const _BNB_ADDRESS = '0x0000000000000000000000000000000000000000'; // Mainnet and Testnet
+    const _MATIC_ADDRESS = '0x0000000000000000000000000000000000000000'; // Mainnet and Testnet
     const _UNIT_MAP = {
         'noether':    '0',
         'wei':        '1',
@@ -156,11 +156,11 @@ var module = (function() {
         },
 
         get_native_address: function() {
-            return _BNB_ADDRESS;
+            return _MATIC_ADDRESS;
         },
 
         is_native_address: function(address) {
-            return address === _BNB_ADDRESS;
+            return address === _MATIC_ADDRESS;
         },
 
         is_same_address: function(address1, address2) {

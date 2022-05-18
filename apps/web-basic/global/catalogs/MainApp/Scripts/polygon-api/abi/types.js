@@ -1,5 +1,5 @@
 var module = (function() {
-    const crypto = __ETHEREUM__.crypto;
+    const crypto = __POLYGON__.crypto;
 
     const _PADDING_STRING = "0000000000000000000000000000000000000000000000000000000000000000";
 

@@ -31,6 +31,24 @@ var module = (function() {
         return new BigNumber(value, 10);
     }
 
+    function _value_to_bytes(value) {
+        if (typeof value === 'string' && value.startsWith('0x')) {
+            return _hex_to_bytes(value.replace(/^0x/, ''));
+        }
+
+        return value;
+    }
+
+    function _hex_to_bytes(hex) {
+        var bytes = [];
+
+        for (var i = 0; i < hex.length; i += 2) {
+            bytes.push(parseInt(hex.substr(i, 2), 16));
+        }
+
+        return bytes;
+    }
+
     function _get_value_of_unit(unit) {
         return new BigNumber(_UNIT_MAP[unit], 10);
     }
@@ -90,6 +108,10 @@ var module = (function() {
 
         value_to_hex: function(value) {
             return "0x" + _value_to_bignum(value).toString(16);
+        },
+
+        value_to_bytes: function(value) {
+            return _value_to_bytes(value);
         },
 
         fold_decimals: function(peb, decimals) {

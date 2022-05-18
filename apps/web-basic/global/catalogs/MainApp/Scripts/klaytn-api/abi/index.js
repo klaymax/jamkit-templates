@@ -17,7 +17,12 @@ var module = (function () {
                 head += types["uint256"].encode(32 * tuple.length + tail.length / 2);
                 tail += _encode_array(type.replace(/\[\]$/, ""), values[i]);
             } else {
-                head += types[type].encode(values[i]);
+                if (types[type].is_dynamic()) {
+                    head += types["uint256"].encode(32 * tuple.length + tail.length / 2);
+                    tail += types[type].encode(values[i]);
+                } else {
+                    head += types[type].encode(values[i]);
+                }
             }
         });
 
@@ -27,7 +32,7 @@ var module = (function () {
     function _encode_array(type, value) {
         var string = types["uint256"].encode(value.length);
 
-        if (type.endsWith("[]") || types[type].is_dynamic()) {
+        if (type.endsWith("[]")) {
             for (var i = 0; i < value.length; ++i) {
                 // TODO
             }    
