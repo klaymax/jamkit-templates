@@ -3,6 +3,7 @@ var module = (function() {
           ethereum = require("ethereum-api"),
           polygon  = require("polygon-api"),
           binance  = require("binance-api"),
+          klauytn  = require("klauytn-api"),
           webjs    = require("webjs-helper");
 
     var _chain = "";
@@ -143,6 +144,10 @@ var module = (function() {
 
         if (chain === "binance") {
             return binance;
+        }
+
+        if (chain === "klaytn") {
+            return klaytn;
         }
     }
     
