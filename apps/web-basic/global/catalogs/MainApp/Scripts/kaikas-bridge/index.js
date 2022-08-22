@@ -18,6 +18,12 @@ var module = (function() {
 
             return;
         }
+
+        if (request["method"] === "klay_sign") {
+            _sign_message(params, request);
+
+            return;
+        }
         
         if ([ "klay_getTransactionReceipt" ].includes(request["method"])) {
             _send_request_safely(params, request);
@@ -89,6 +95,24 @@ var module = (function() {
                 webjs.callback(params["reject"], error);
             });
     }
+
+    function _sign_message(params, request) {
+        var [ account, message, password ] = request["params"];
+
+        klaytn.broadcast.sign(_decode_hex_message(message), account, password)
+            .then(function(signature) {
+                webjs.callback(params["resolve"], { "result": signature });
+            })
+            .catch(function(error) {
+                webjs.callback(params["reject"], error);
+            });
+    }
+
+    function _decode_hex_message(message) {
+        var messa = klaytn.crypto.string_from_bits(klaytn.crypto.hex_to_bits(message));
+        return messa;
+    }
+
 
     function _get_account_address(params) {
         wallet.get_account_address("klaytn")
