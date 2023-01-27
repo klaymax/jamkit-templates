@@ -2,27 +2,27 @@ var module = (function() {
     var _id = "", _bridge = "";
 
     function _promise_callbacks(resolve, reject) {
-        var unique = (Math.random() * 10000).toFixed(0)
+        var unique = (Math.random() * 10000).toFixed(0);
         
-        global["webjs__resolve_" + unique] = function(result) { 
-            resolve(result["result"] !== "undefined" ? JSON.parse(result["result"]) : undefined);
+        global["webjs__resolve_" + unique] = function({ result }) {
+            resolve(result !== "undefined" ? JSON.parse(result) : undefined);
     
             delete global["webjs__resolve_" + unique];
             delete global["webjs__reject_"  + unique];
         }
     
-        global["webjs__reject_" + unique] = function(error) { 
-            reject(error["error"] !== "undefined" ? JSON.parse(error["error"]) : undefined);
+        global["webjs__reject_" + unique] = function({ error }) { 
+            reject(error !== "undefined" ? JSON.parse(error) : undefined);
     
             delete global["webjs__resolve_" + unique];
             delete global["webjs__reject_"  + unique];
         }
     
-        return [ "webjs__resolve_" + unique, "webjs__reject_" + unique ]
+        return [ "webjs__resolve_" + unique, "webjs__reject_" + unique ];
     }
     
     function _unfold_params(params) {
-        var string = ""
+        var string = "";
     
         params.forEach(function(param) {
             if (string.length > 0) {
@@ -65,7 +65,7 @@ var module = (function() {
             _id = id, _bridge = bridge;
 
             _evaluate(dir_path + "/bridge.js");
-            _evaluate("webjs.initialize(\"" + bridge + "\")");
+            _evaluate("webjs.initialize(\"" + bridge + "\", \"" + $env["OS"] + "\")");
 
             return this;
         },
