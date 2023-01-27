@@ -3,7 +3,7 @@ var module = (function() {
           ethereum = require("ethereum-api"),
           polygon  = require("polygon-api"),
           binance  = require("binance-api"),
-          klauytn  = require("klauytn-api"),
+          klaytn  = require("klaytn-api"),
           webjs    = require("webjs-helper");
 
     var _chain = "";

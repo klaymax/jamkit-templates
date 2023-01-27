@@ -19,7 +19,8 @@ window.klaytn = (function() {
             webjs.call("kaikas_send_request", request)
                 .then(function(response) {
                     resolve(Object.assign(response, {
-                        "id": request["id"]
+                        "id": request["id"],
+                        "jsonrpc": "2.0"
                     }));
                 })
                 .catch(function(error) {
